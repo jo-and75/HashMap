@@ -1,4 +1,9 @@
-class HashMap 
+class HashMap  
+  attr_accessor :buckets
+
+  def initialize 
+    @buckets  = Array.new(16)
+  end 
 
   def hash(key) 
     hash_code = 0
@@ -8,5 +13,7 @@ class HashMap
       
     hash_code
   end
+end 
 
-end
+test = HashMap.new 
+p test.buckets.size
