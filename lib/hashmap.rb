@@ -1,3 +1,5 @@
+require_relative 'lib/linked_list.rb' 
+
 class HashMap  
   attr_accessor :buckets
 
@@ -38,4 +40,6 @@ class HashMap
 end  
 
 
-test = HashMap.new 
+test = HashMap.new  
+test.set('Josh', 'Andy') 
+test.set('Josea', 'Rose')
