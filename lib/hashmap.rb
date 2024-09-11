@@ -44,17 +44,28 @@ class HashMap
     bucket_index = hash(key)  
     bucket = get_or_create_bucket(bucket_index)
     if bucket.contains(key)
-      current_node = bucket.find(key) 
-      result = current_node.value[key] 
+      current_node = bucket.find(key)  
+      puts current_node.value[key] 
+      return current_node.value[key] 
     else 
-      result = nil 
+     puts nil.inspect
+    return nil
     end 
-    puts result.inspect
-  end 
+  end  
+
+  def has?(key) 
+    bucket_index = hash(key) 
+    bucket = get_or_create_bucket(bucket_index) 
+    if bucket.contains(key) 
+      puts true 
+    else 
+      puts false 
+    end
+  end
 end  
 
 
 test = HashMap.new  
 test.set('Josh', 'Andy') 
 test.set('Josea', 'Rose') 
-test.get('Josh')
+test.has?('Jack')
