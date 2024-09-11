@@ -14,12 +14,16 @@ class HashMap
     hash_code
   end 
 
-  def set(key,value) 
-    if hash(key).nil? 
-      
-  end
+  def get_or_create_bucket(index)  
+    if @buckets[index].nil? 
+      @buckets[index] = LinkedList.new 
+    else 
+      @buckets[index] 
+    end
+  end 
+  
+  
 end  
 
 
 test = HashMap.new 
-p test.buckets.size
