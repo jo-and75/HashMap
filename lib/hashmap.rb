@@ -12,8 +12,14 @@ class HashMap
     key.each_char { |char| hash_code = prime_number * hash_code + char.ord }
       
     hash_code
+  end 
+
+  def set(key,value) 
+    if hash(key).nil? 
+      
   end
-end 
+end  
+
 
 test = HashMap.new 
 p test.buckets.size
