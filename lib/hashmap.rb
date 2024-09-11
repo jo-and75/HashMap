@@ -26,7 +26,9 @@ class HashMap
   end 
   
   def set(key,value)   
-    bucket_index = hash(key)  
+    bucket_index = hash(key)   
+    raise IndexError if bucket_index.negative? || bucket_index >= @buckets.length
+
     bucket = get_or_create_bucket(bucket_index) 
     
     if bucket.contains(key) 
@@ -38,9 +40,21 @@ class HashMap
     bucket.to_string
   end 
   
+  def get(key)  
+    bucket_index = hash(key)  
+    bucket = get_or_create_bucket(bucket_index)
+    if bucket.contains(key)
+      current_node = bucket.find(key) 
+      result = current_node.value[key] 
+    else 
+      result = nil 
+    end 
+    puts result.inspect
+  end 
 end  
 
 
 test = HashMap.new  
 test.set('Josh', 'Andy') 
-test.set('Josea', 'Rose')
+test.set('Josea', 'Rose') 
+test.get('Josh')
