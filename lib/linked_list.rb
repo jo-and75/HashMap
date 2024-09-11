@@ -15,8 +15,9 @@ class LinkedList
 
   def to_string(node = @head)
     if node.nil?
-      print ' nil '
-    else
+      print ' nil ' 
+      puts
+    else 
       print "(#{node.value}) -> "
       to_string(node.next_node)
     end
