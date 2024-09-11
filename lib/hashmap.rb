@@ -37,7 +37,7 @@ class HashMap
     else 
       bucket.append({key => value}) 
     end    
-    bucket.to_string
+    # bucket.to_string
   end 
   
   def get(key)  
@@ -61,6 +61,15 @@ class HashMap
     else 
       puts false 
     end
+  end 
+
+  def remove(key)  
+    bucket_index = hash(key) 
+    bucket = get_or_create_bucket(bucket_index) 
+    if bucket.contains(key) 
+       bucket.remove(key)
+    end 
+    bucket.to_string
   end
 end  
 
@@ -68,4 +77,6 @@ end
 test = HashMap.new  
 test.set('Josh', 'Andy') 
 test.set('Josea', 'Rose') 
-test.has?('Jack')
+test.set('Joqus', 'Blue')  
+# test.has?('Jack') 
+test.remove('Joqus')
