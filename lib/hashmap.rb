@@ -22,6 +22,18 @@ class HashMap
     end
   end 
   
+  def set(key,value)   
+    bucket_index = hash(key)  
+    bucket = get_or_create_bucket(bucket_index) 
+    
+    if bucket.contains(key) 
+      current_node = bucket.find(key) 
+      current_node.value[key] = value 
+    else 
+      bucket.append({key => value}) 
+    end    
+    bucket.to_string
+  end 
   
 end  
 
