@@ -1,4 +1,4 @@
-require_relative 'lib/linked_list.rb' 
+require_relative 'linked_list.rb' 
 
 class HashMap  
   attr_accessor :buckets
@@ -13,6 +13,7 @@ class HashMap
       
     key.each_char { |char| hash_code = prime_number * hash_code + char.ord }
       
+    hash_code %= 16 
     hash_code
   end 
 
