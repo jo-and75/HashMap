@@ -28,7 +28,13 @@ class LinkedList
     return node if node.value.keys.first == key
 
     find(key, node.next_node)
-  end 
+  end  
+
+  def size(list = @head)
+    return 0 if list.nil?
+
+    1 + size(list.next_node)
+  end
 
   def remove(key) 
     if @head.value.keys.first == key 

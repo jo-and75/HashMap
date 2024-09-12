@@ -70,6 +70,16 @@ class HashMap
        bucket.remove(key)
     end 
     bucket.to_string
+  end 
+
+  def length(i = 0,count = 0)  
+    until i > 15 do
+      if !@buckets[i].nil? 
+        count += @buckets[i].size 
+      end  
+      i+=1
+    end   
+    puts count     
   end
 end  
 
@@ -77,6 +87,13 @@ end
 test = HashMap.new  
 test.set('Josh', 'Andy') 
 test.set('Josea', 'Rose') 
-test.set('Joqus', 'Blue')  
+test.set('Joqus', 'Blue')   
+test.set('apple', 'red')
+test.set('banana', 'yellow')
+test.set('carrot', 'orange')
+test.set('dog', 'brown')
 # test.has?('Jack') 
-test.remove('Joqus')
+# test.remove('Joqus') 
+test.length 
+
+# puts test.buckets.length
