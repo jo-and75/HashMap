@@ -80,6 +80,16 @@ class HashMap
       i+=1
     end   
     puts count     
+  end 
+
+  def remove(i = 0)  
+    until i >= @buckets.length do 
+      if !@buckets[i].nil? 
+        @buckets[i] = nil 
+      end 
+      i += 1 
+    end 
+    p @buckets
   end
 end  
 
@@ -94,6 +104,6 @@ test.set('carrot', 'orange')
 test.set('dog', 'brown')
 # test.has?('Jack') 
 # test.remove('Joqus') 
-test.length 
+test.remove 
 
 # puts test.buckets.length
