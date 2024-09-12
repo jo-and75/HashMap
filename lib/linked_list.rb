@@ -15,30 +15,38 @@ class LinkedList
 
   def to_string(node = @head)
     if node.nil?
-      print ' nil ' 
+      print ' nil '
       puts
-    else 
+    else
       print "(#{node.value}) -> "
       to_string(node.next_node)
     end
   end
 
-  def find_keys(node = @head,results = [])  
-    if node.nil? 
-      return 
-    else 
-      results << node.value.keys
-      find_keys(node.next_node, results) 
-    end  
+  def find_keys(node = @head, results = [])
+    return if node.nil?
+
+    results << node.value.keys
+    find_keys(node.next_node, results)
+
     results
-  end 
+  end
+
+  def find_values(node = @head, results = [])
+    return if node.nil?
+
+    results << node.value.values
+    find_values(node.next_node, results)
+
+   results
+  end
 
   def find(key, node = @head)
     return nil if node.nil?
     return node if node.value.keys.first == key
 
     find(key, node.next_node)
-  end  
+  end
 
   def size(list = @head)
     return 0 if list.nil?
@@ -46,21 +54,19 @@ class LinkedList
     1 + size(list.next_node)
   end
 
-  def remove(key) 
-    if @head.value.keys.first == key 
-        puts @head.value[key] 
-        @head = @head.next_node  
-        # puts @head.value
+  def remove(key)
+    if @head.value.keys.first == key
+      puts @head.value[key]
+      @head = @head.next_node
+    # puts @head.value
     else
       before_desired_node = @head
       before_desired_node = before_desired_node.next_node until before_desired_node.next_node.value.keys.first == key
-      desired_node = before_desired_node.next_node.value[key]  
-      if !before_desired_node.next_node.next_node.nil?
-        before_desired_node.next_node = before_desired_node.next_node.next_node    
-      else 
-        before_desired_node.next_node = nil  
-      end  
-      puts desired_node  
+      desired_node = before_desired_node.next_node.value[key]
+      before_desired_node.next_node = unless before_desired_node.next_node.next_node.nil?
+                                        before_desired_node.next_node.next_node
+                                      end
+      puts desired_node
     end
   end
 
