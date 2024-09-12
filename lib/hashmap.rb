@@ -1,7 +1,7 @@
 require_relative 'linked_list'
 
 class HashMap
-  attr_accessor :buckets
+  attr_accessor :buckets , :load_factor
 
   def initialize
     @buckets  = Array.new(16)
@@ -25,7 +25,8 @@ class HashMap
     end
   end
 
-  def set(key, value)
+  def set(key, value) 
+    @load_factor = @buckets.length / @buckets.length
     bucket_index = hash(key)
     raise IndexError if bucket_index.negative? || bucket_index >= @buckets.length
 
@@ -37,7 +38,7 @@ class HashMap
     else
       bucket.append({ key => value })
     end
-    # bucket.to_string
+    bucket.to_string 
   end
 
   def get(key)
@@ -70,12 +71,13 @@ class HashMap
     bucket.to_string
   end
 
-  def length(i = 0, count = 0)
+  def length(i = 0, count = 0) 
+    @total_entries = 0
     until i >= @buckets.length
-      count += @buckets[i].size unless @buckets[i].nil?
+      @total_entries += @buckets[i].size unless @buckets[i].nil?
       i += 1
     end
-    puts count
+    puts @total_entries
   end
 
   def clear(i = 0)
