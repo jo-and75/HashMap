@@ -82,7 +82,7 @@ class HashMap
     puts count     
   end 
 
-  def remove(i = 0)  
+  def clear(i = 0)  
     until i >= @buckets.length do 
       if !@buckets[i].nil? 
         @buckets[i] = nil 
@@ -104,6 +104,6 @@ test.set('carrot', 'orange')
 test.set('dog', 'brown')
 # test.has?('Jack') 
 # test.remove('Joqus') 
-test.remove 
+test.clear
 
 # puts test.buckets.length
