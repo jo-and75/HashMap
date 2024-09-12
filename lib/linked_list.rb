@@ -23,6 +23,16 @@ class LinkedList
     end
   end
 
+  def find_keys(node = @head,results = [])  
+    if node.nil? 
+      return 
+    else 
+      results << node.value.keys
+      find_keys(node.next_node, results) 
+    end  
+    results
+  end 
+
   def find(key, node = @head)
     return nil if node.nil?
     return node if node.value.keys.first == key

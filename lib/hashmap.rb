@@ -90,6 +90,16 @@ class HashMap
       i += 1 
     end 
     p @buckets
+  end 
+
+  def keys(i = 0, results = []) 
+    until i >= @buckets.length do 
+      if !@buckets[i].nil? 
+      results << @buckets[i].find_keys
+      end 
+      i += 1 
+    end  
+    puts results 
   end
 end  
 
@@ -104,6 +114,6 @@ test.set('carrot', 'orange')
 test.set('dog', 'brown')
 # test.has?('Jack') 
 # test.remove('Joqus') 
-test.clear
+test.keys
 
 # puts test.buckets.length
