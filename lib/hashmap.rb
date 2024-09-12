@@ -73,7 +73,7 @@ class HashMap
   end 
 
   def length(i = 0,count = 0)  
-    until i > 15 do
+    until i >= @buckets.length do
       if !@buckets[i].nil? 
         count += @buckets[i].size 
       end  
