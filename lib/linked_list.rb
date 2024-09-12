@@ -39,6 +39,18 @@ class LinkedList
     find_values(node.next_node, results)
 
    results
+  end 
+
+  def find_key_value(node = @head, results = []) 
+    return if node.nil? 
+
+    temp_arr = Array.new 
+    temp_arr << node.value.keys 
+    temp_arr << node.value.values 
+    results << temp_arr.flatten
+    find_key_value(node.next_node,results) 
+
+    results
   end
 
   def find(key, node = @head)

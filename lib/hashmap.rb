@@ -100,6 +100,14 @@ class HashMap
       i += 1
     end
     puts results
+  end 
+
+  def entries(i = 0, results = []) 
+    until i >= @buckets.length 
+      results << @buckets[i].find_key_value unless @buckets[i].nil? 
+      i += 1
+    end 
+    puts results.inspect
   end
 end
 
@@ -113,6 +121,6 @@ test.set('carrot', 'orange')
 test.set('dog', 'brown')
 # test.has?('Jack')
 # test.remove('Joqus')
-test.values
+test.entries
 
 # puts test.buckets.length
