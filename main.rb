@@ -1,4 +1,4 @@
-require_relative 'lib/hashmap.rb' 
+require_relative 'lib/hashmap'
 
 test = HashMap.new
 test.set('apple', 'red')
@@ -12,6 +12,6 @@ test.set('hat', 'black')
 test.set('ice cream', 'white')
 test.set('jacket', 'blue')
 test.set('kite', 'pink')
-test.set('lion', 'golden') 
-test.set('moon', 'silver')
-puts test.length
+test.set('lion', 'golden')
+# test.set('moon', 'silver')
+puts test.load_factor
