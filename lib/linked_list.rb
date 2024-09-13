@@ -1,6 +1,10 @@
 class LinkedList
   def initialize
     @head = nil
+  end 
+
+  def head 
+    @head 
   end
 
   def append(entry)

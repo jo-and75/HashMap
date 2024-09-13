@@ -14,7 +14,7 @@ class HashMap
 
     key.each_char { |char| hash_code = prime_number * hash_code + char.ord }
 
-    hash_code %= 16
+    hash_code %= @buckets.length
     hash_code
   end
 
@@ -39,18 +39,56 @@ class HashMap
       @entry_count += 1
       bucket.append({ key => value }) 
     end 
-    @load_factor = @entry_count.to_f / @buckets.length
+     @load_factor = @entry_count.to_f / @buckets.length
     bucket.to_string 
-    rehash if @load_factor >= 0.75
+    resize if @load_factor >= 0.75
   end
- 
-  def resize
-    # Create a new bucket array with double the size
-    new_buckets = Array.new(@buckets.length * 2)
-    @buckets, old_buckets = new_buckets, @buckets # Swap the old and new buckets
-  end 
 
+  def resize
+    old_buckets = @buckets # Save the old buckets
+    @buckets = Array.new(old_buckets.length * 2) # Double the size of the bucket array
+    @entry_count = 0 # Reset the entry count because we'll re-add all entries
+    rehash(old_buckets) # Call rehash, passing in the old buckets
+  end
   
+  def rehash(old_buckets)
+    old_buckets.each do |bucket| # Now iterate over the old buckets, not the new ones
+      next if bucket.nil?
+  
+      current_node = bucket.head # Traverse the linked list
+      until current_node.nil?
+        key = current_node.value.keys.first
+        value = current_node.value[key]
+        set(key, value) # Reinsert into the new resized bucket array
+        current_node = current_node.next_node
+      end
+    end
+  end
+  
+
+  # def resize
+  #   # Create a new bucket array with double the size
+  #   new_buckets = Array.new(@buckets.length * 2)
+  #   old_buckets, @buckets = @buckets,new_buckets # Swap the old and new buckets  
+  #   rehash
+  # end 
+
+  # def rehash 
+  #   old_buckets = @buckets
+  #   i = 0 
+  #   until i > old_buckets.length 
+  #     if !old_buckets[i].nil?  
+  #       current_node = old_buckets[i].head
+  #       until current_node.nil? 
+  #         key = current_node.value.keys.first 
+  #         value = current_node.value[key] 
+  #         set(key,value) 
+  #         current_node = current_node.next_node
+  #       end 
+  #     end  
+  #     i += 1
+  #   end 
+  # end
 
   def get(key)
     bucket_index = hash(key)

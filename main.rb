@@ -1,4 +1,5 @@
 require_relative 'lib/hashmap'
+require_relative 'lib/linked_list'
 
 test = HashMap.new
 test.set('apple', 'red')
@@ -13,5 +14,6 @@ test.set('ice cream', 'white')
 test.set('jacket', 'blue')
 test.set('kite', 'pink')
 test.set('lion', 'golden')
-test.set('moon', 'silver')
-puts test.load_factor
+test.set('moon', 'silver') 
+# puts test.buckets 
+puts test.entries
