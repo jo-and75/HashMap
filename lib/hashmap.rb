@@ -41,27 +41,16 @@ class HashMap
     end 
     @load_factor = @entry_count.to_f / @buckets.length
     bucket.to_string 
-    # puts @load_factor
+    rehash if @load_factor >= 0.75
   end
  
-  def rehash
+  def resize
     # Create a new bucket array with double the size
     new_buckets = Array.new(@buckets.length * 2)
-    old_buckets = @buckets
-    @buckets = new_buckets
-    @count = 0
+    @buckets, old_buckets = new_buckets, @buckets # Swap the old and new buckets
+  end 
 
-    # Rehash all the key-value pairs into the new bucket array
-    old_buckets.each do |bucket|
-      next if bucket.nil?
-
-      bucket.each do |node|
-        key = node.value.keys.first
-        value = node.value[key]
-        set(key, value)  # Re-insert into the new bucket array
-      end
-    end
-  end
+  
 
   def get(key)
     bucket_index = hash(key)
