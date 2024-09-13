@@ -4,7 +4,7 @@ class HashMap
   attr_accessor :buckets, :load_factor
 
   def initialize
-    @buckets  = Array.new(16) 
+    @buckets = Array.new(16)
     @entry_count = 0
   end
 
@@ -35,36 +35,36 @@ class HashMap
     if bucket.contains(key)
       current_node = bucket.find(key)
       current_node.value[key] = value
-    else 
+    else
       @entry_count += 1
-      bucket.append({ key => value }) 
-    end 
-     @load_factor = @entry_count.to_f / @buckets.length
-    bucket.to_string 
+      bucket.append({ key => value })
+    end
+    @load_factor = @entry_count.to_f / @buckets.length
+    bucket.to_string
     resize if @load_factor >= 0.75
   end
 
   def resize
-    old_buckets = @buckets 
-    @buckets = Array.new(old_buckets.length * 2) 
-    @entry_count = 0 
-    rehash(old_buckets) 
+    old_buckets = @buckets
+    @buckets = Array.new(old_buckets.length * 2)
+    @entry_count = 0
+    rehash(old_buckets)
   end
-  
+
   def rehash(old_buckets)
-    old_buckets.each do |bucket| 
+    old_buckets.each do |bucket|
       next if bucket.nil?
-  
-      current_node = bucket.head 
+
+      current_node = bucket.head
       until current_node.nil?
         key = current_node.value.keys.first
         value = current_node.value[key]
-        set(key, value) 
+        set(key, value)
         current_node = current_node.next_node
       end
     end
   end
-  
+
   def get(key)
     bucket_index = hash(key)
     bucket = get_or_create_bucket(bucket_index)
@@ -95,7 +95,7 @@ class HashMap
     bucket.to_string
   end
 
-  def length(i = 0,count = 0)
+  def length(i = 0, count = 0)
     until i >= @buckets.length
       count += @buckets[i].size unless @buckets[i].nil?
       i += 1

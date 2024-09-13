@@ -1,11 +1,9 @@
 class LinkedList
   def initialize
     @head = nil
-  end 
-
-  def head 
-    @head 
   end
+
+  attr_reader :head
 
   def append(entry)
     if @head.nil?
